@@ -12,12 +12,6 @@ intelligence = startingPointsPerStat
 wisdom = startingPointsPerStat
 charisma = startingPointsPerStat
 
-def start():
-    print("Enter your character name")
-    characterName = input()
-    print(f"{characterName} has been created")
-    printStats()
-
 def canAddPoints():
     if (strength + dexterity + constitution + intelligence + wisdom + charisma < maximumTotalPoints):
         return True
@@ -32,6 +26,43 @@ def printStats():
     print(f"Wisdom {wisdom}")
     print(f"Charisma {charisma}")
 
+def updateStat(startValue):
+    selection = input()
+
+    while(selection == 'a' or selection == 'd'):
+        if selection == 'a':
+            if startValue > 1:
+                startValue -= 1
+                print(f"{startValue}")
+        elif selection == 'd':
+            if startValue < maximumPointsPerStat:
+                startValue += 1
+                print(f"{startValue}")
+        selection = input()
+
+    return startValue
+
+def start():
+    global strength
+    global dexterity
+    print("Enter your character name")
+    characterName = input()
+    print(f"{characterName} has been created")
+    printStats()
+
+    print("Set strength - a: subtract d: add")
+
+    print(f"Strength: {strength}")
+
+    strength = updateStat(strength)
+
+    print("Set dexterity - a: subtract d: add")
+
+    print(f"Dexterity: {dexterity}")
+
+    dexterity = updateStat(dexterity)
+
+    printStats()
 
 
 
